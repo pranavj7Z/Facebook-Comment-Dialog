@@ -1,4 +1,4 @@
-package com.pranavjayaraj.healofy;
+package com.pranavjayaraj.healofy.Adapter;
 
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -6,23 +6,22 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pranavjayaraj.healofy.R;
+
 public class ViewHolder
         extends RecyclerView.ViewHolder {
-    TextView examName;
-    TextView examMessage;
-    TextView examDate;
+    TextView Name;
+    TextView Message;
+    TextView Date;
     RelativeLayout relativeLayout;
 
     ViewHolder(View itemView)
     {
         super(itemView);
-        examName
-                = (TextView)itemView
-                .findViewById(R.id.examName);
-        examDate
+        Date
                 = (TextView)itemView
                 .findViewById(R.id.examDate);
-        examMessage
+        Message
                 = (TextView)itemView
                 .findViewById(R.id.examMessage);
         relativeLayout = (RelativeLayout)itemView.findViewById(R.id.relative);

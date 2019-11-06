@@ -1,8 +1,10 @@
-package com.pranavjayaraj.healofy;
+package com.pranavjayaraj.healofy.SwipeDialogHelpers;
 
 import android.content.Context;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
+
+import com.pranavjayaraj.healofy.SwipeDialogHelpers.DismissOnSwipeListener;
 
 public class SwipeableFrameLayout extends FrameLayout {
 
@@ -20,7 +22,6 @@ public class SwipeableFrameLayout extends FrameLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (mTouchListener != null) {
             if (mTouchListener.onTouch(this, ev)) {
-                return true;
             }
         }
         return super.onInterceptTouchEvent(ev);

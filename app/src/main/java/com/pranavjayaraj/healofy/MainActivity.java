@@ -5,13 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+
+import com.pranavjayaraj.healofy.Adapter.MainActivityAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-        Adapter adapter;
+        MainActivityAdapter mainActivityAdapter;
         RecyclerView recyclerView;
 
         @Override
@@ -22,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
             List<Data> list = new ArrayList<>();
             list = getData();
 
+            View dialog = LayoutInflater.from(this).inflate(R.layout.fragment_dialog, null);
+
             recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-            adapter = new Adapter(list, getApplication(),getSupportFragmentManager());
-            recyclerView.setAdapter(adapter);
+            mainActivityAdapter = new MainActivityAdapter(list, getApplication(),getSupportFragmentManager(),dialog);
+            recyclerView.setAdapter(mainActivityAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         }
 

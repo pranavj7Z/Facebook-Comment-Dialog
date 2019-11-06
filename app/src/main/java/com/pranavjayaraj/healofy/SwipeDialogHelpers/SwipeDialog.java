@@ -1,10 +1,13 @@
-package com.pranavjayaraj.healofy;
+package com.pranavjayaraj.healofy.SwipeDialogHelpers;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.pranavjayaraj.healofy.SwipeDialogHelpers.DismissOnSwipeListener;
+import com.pranavjayaraj.healofy.SwipeDialogHelpers.SwipeableFrameLayout;
 
 public class SwipeDialog extends DialogFragment {
 

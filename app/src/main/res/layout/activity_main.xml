@@ -9,6 +9,7 @@
             android:nestedScrollingEnabled="false"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
             android:overScrollMode="never"
             android:layout_height="wrap_content"/>
 

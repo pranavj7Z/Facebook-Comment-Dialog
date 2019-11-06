@@ -35,13 +35,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="10dp" />
 
-    <ImageView
-        android:layout_below="@+id/examMessage"
-        android:layout_width="match_parent"
-        android:src="@android:drawable/ic_menu_report_image"
-        android:layout_height="250dp">
-    </ImageView>
-
     <TextView
         android:id="@+id/border2"
         android:layout_width="match_parent"

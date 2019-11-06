@@ -1,4 +1,4 @@
-package com.pranavjayaraj.healofy;
+package com.pranavjayaraj.healofy.SwipeDialogHelpers;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -100,23 +100,24 @@ public class DismissOnSwipeListener implements View.OnTouchListener {
                     break;
                 }
 
-                float deltaX = motionEvent.getRawX() - mDownX;
+                float deltaX = motionEvent.getRawY() - mDownY;
                 mVelocityTracker.addMovement(motionEvent);
                 mVelocityTracker.computeCurrentVelocity(1000);
-                float velocityX = mVelocityTracker.getXVelocity();
-                float absVelocityX = Math.abs(velocityX);
-                float absVelocityY = Math.abs(mVelocityTracker.getYVelocity());
+                float velocityY = mVelocityTracker.getYVelocity();
+                float absVelocityY = Math.abs(velocityY);
+                float absVelocityX = Math.abs(mVelocityTracker.getXVelocity());
                 boolean dismiss = false;
                 boolean dismisstop = false;
-                if (Math.abs(deltaX) > mViewHeight / 2 && mSwiping) {
+                // Modify here to dismiss soon
+                if (Math.abs(deltaX) > mViewHeight /8 && mSwiping) {
                     dismiss = true;
                     dismisstop = deltaX > 0;
                 } else if (mMinFlingVelocity <= absVelocityX && absVelocityX <= mMaxFlingVelocity
                         && absVelocityY < absVelocityX
                         && absVelocityY < absVelocityX && mSwiping) {
                     // dismiss only if flinging in the same direction as dragging
-                    dismiss = (velocityX < 0) == (deltaX < 0);
-                    dismisstop = mVelocityTracker.getXVelocity() > 0;
+                    dismiss = (velocityY < 0) == (deltaX < 0);
+                    dismisstop = mVelocityTracker.getYVelocity() > 0;
                 }
                 if (dismiss) {
                     // dismiss
@@ -175,9 +176,9 @@ public class DismissOnSwipeListener implements View.OnTouchListener {
                 mVelocityTracker.addMovement(motionEvent);
                 float deltaX = motionEvent.getRawX() - mDownX;
                 float deltaY = motionEvent.getRawY() - mDownY;
-                if (Math.abs(deltaX) > mSlop && Math.abs(deltaY) < Math.abs(deltaX) / 2) {
+                if (Math.abs(deltaY) > mSlop && Math.abs(deltaX) < Math.abs(deltaY) / 2) {
                     mSwiping = true;
-                    mSwipingSlop = (deltaX > 0 ? mSlop : -mSlop);
+                    mSwipingSlop = (deltaY > 0 ? mSlop : -mSlop);
                     mView.getParent().requestDisallowInterceptTouchEvent(true);
 
                     // Cancel listview's touch
@@ -190,8 +191,8 @@ public class DismissOnSwipeListener implements View.OnTouchListener {
                 }
 
                 if (mSwiping) {
-                    mTranslationX = deltaX;
-                    mView.setTranslationY(deltaX - mSwipingSlop);
+                    mTranslationX = deltaY;
+                    mView.setTranslationY(deltaY - mSwipingSlop);
                     // TODO: use an ease-out interpolator or such
                     mView.setAlpha(Math.max(0f, Math.min(1f,
                             1f - 2f * Math.abs(deltaX) / mViewHeight)));
@@ -219,7 +220,7 @@ public class DismissOnSwipeListener implements View.OnTouchListener {
                 mCallbacks.onDismiss(mView,toR ,mToken);
                 // Reset view presentation
                 mView.setAlpha(1f);
-                mView.setTranslationX(0);
+                mView.setTranslationY(0);
                 lp.height = originalHeight;
                 mView.setLayoutParams(lp);
             }

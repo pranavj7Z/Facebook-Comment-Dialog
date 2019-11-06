@@ -1,30 +1,37 @@
-package com.pranavjayaraj.healofy;
+package com.pranavjayaraj.healofy.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.pranavjayaraj.healofy.Data;
+import com.pranavjayaraj.healofy.MyDialog;
+import com.pranavjayaraj.healofy.R;
+
 import java.util.Collections;
 import java.util.List;
 
-class DialogAdapter
+public class MainActivityAdapter
         extends RecyclerView.Adapter<ViewHolder> {
 
-    List<Data> list
-            = Collections.emptyList();
+    List<Data> list = Collections.emptyList();
 
     Context context;
 
+    FragmentManager fragmentManager;
+    View view;
 
-    public DialogAdapter(List<Data> list,
-                         Context context)
+    public MainActivityAdapter(List<Data> list,
+                               Context context, FragmentManager fragmentManager, View view)
     {
         this.list = list;
         this.context = context;
+        this.fragmentManager  = fragmentManager;
+        this.view = view;
     }
 
     @Override
@@ -55,12 +62,17 @@ class DialogAdapter
     onBindViewHolder(final ViewHolder viewHolder,
                      final int position)
     {
+        viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MyDialog dialog = new MyDialog();
+                dialog.show(fragmentManager, null);
+            }
+        });
 
-        viewHolder.examName
-                .setText(list.get(position).name);
-        viewHolder.examDate
+        viewHolder.Date
                 .setText(list.get(position).date);
-        viewHolder.examMessage
+        viewHolder.Message
                 .setText(list.get(position).message);
     }
 
@@ -78,19 +90,5 @@ class DialogAdapter
     }
 
     // Sample data for RecyclerView
-    private List<Data> getData()
-    {
-        List<Data> list = new ArrayList<>();
-        list.add(new Data("First Exam",
-                "May 23, 2015",
-                "Best Of Luck"));
-        list.add(new Data("Second Exam",
-                "June 09, 2015",
-                "b of l"));
-        list.add(new Data("My Test Exam",
-                "April 27, 2017",
-                "This is testing exam .."));
 
-        return list;
-    }
 }

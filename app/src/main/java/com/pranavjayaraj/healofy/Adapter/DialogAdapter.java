@@ -1,17 +1,19 @@
-package com.pranavjayaraj.healofy;
+package com.pranavjayaraj.healofy.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.pranavjayaraj.healofy.Data;
+import com.pranavjayaraj.healofy.R;
 
 import java.util.Collections;
 import java.util.List;
 
-class Adapter
+public class DialogAdapter
         extends RecyclerView.Adapter<ViewHolder> {
 
     List<Data> list
@@ -19,14 +21,12 @@ class Adapter
 
     Context context;
 
-    FragmentManager fragmentManager;
 
-    public Adapter(List<Data> list,
-                   Context context,FragmentManager fragmentManager)
+    public DialogAdapter(List<Data> list,
+                         Context context)
     {
         this.list = list;
         this.context = context;
-        this.fragmentManager  = fragmentManager;
     }
 
     @Override
@@ -44,7 +44,7 @@ class Adapter
 
         View photoView
                 = inflater
-                .inflate(R.layout.item,
+                .inflate(R.layout.dialogitem,
                         parent, false);
 
         ViewHolder viewHolder
@@ -57,19 +57,10 @@ class Adapter
     onBindViewHolder(final ViewHolder viewHolder,
                      final int position)
     {
-        viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final MyDialog dialog = new MyDialog();
-                dialog.show(fragmentManager, null);
-            }
-        });
 
-        viewHolder.examName
-                .setText(list.get(position).name);
-        viewHolder.examDate
+        viewHolder.Date
                 .setText(list.get(position).date);
-        viewHolder.examMessage
+        viewHolder.Message
                 .setText(list.get(position).message);
     }
 
@@ -87,5 +78,4 @@ class Adapter
     }
 
     // Sample data for RecyclerView
-
 }

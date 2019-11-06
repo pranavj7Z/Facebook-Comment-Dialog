@@ -1,13 +1,13 @@
 package com.pranavjayaraj.healofy;
 
 public class Data {
-    String name;
-    String date;
-    String message;
+    public String name;
+    public String date;
+    public String message;
 
-    Data(String name,
-         String date,
-         String message)
+    public Data(String name,
+                String date,
+                String message)
     {
         this.name = name;
         this.date = date;
